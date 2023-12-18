@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>USERS:</h1>
+    <ul></ul>
+
+    <H2>DATE</H2>
+    <button type="button" onclick="document.getElementById('demo').innerHTML=Date()"> DATE</button>
+    <p id="demo"></p>
+    <script>
+
+fetch('https://reqres.in/api/users?page=1')
+    .then(res => res.json())
+    .then(data => {
+        // Assuming 'ul' exists in your HTML, or create it dynamically
+        const ulElement = document.querySelector('ul') || document.createElement('ul');
+
+        // Iterate over the array
+        data.data.forEach(user => {
+            const markup = `<li>${user.first_name} ${user.last_name}</li>`;
+            ulElement.insertAdjacentHTML('beforeend', markup);
+        });
+
+        // Append the ul element to the document body if created dynamically
+        if (!document.querySelector('ul')) {
+            document.body.appendChild(ulElement);
+        }
+    })
+    .catch(error => console.error(error));
+
+       // fetch('https://reqres.in/api/users?page=1')
+       // .then(res =>{
+       //     return res.json();
+      //  })
+
+       // .then (data => {
+       //     data =JSON.parse(data);
+        //    data.forEach(user => {
+       //         const markup =`<li>${user.name}</li>`;
+//
+        //        document.querySelector('ul').insertAdjacentHTML('beforeend' , markup);
+       //     });
+       // })
+     //   .catch(error => console.log(error));
+    </script>
+</body>
+
+</html>
